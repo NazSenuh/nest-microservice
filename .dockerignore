@@ -1,0 +1,9 @@
+node_modules
+dist
+.example.env
+.env
+.git
+README.md
+.prttierrc
+Dockerfile
+.github

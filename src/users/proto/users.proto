@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package users;
+
+service UsersService {
+    rpc CreateUser (CreateUser) returns (ResponseStatus);
+    rpc GetUsers (UserData) returns (ArrayUsers);
+    rpc GetOneUser (FindOneUser) returns (ResponseUser);
+    rpc UpdateUser (UpdateUser) returns (ResponseStatus);
+    rpc DeleteUser (UserId) returns (ResponseStatus);
+    rpc CompareUser (UserForCompare) returns (CompareResult);
+}
+
+enum ProfileStatus {
+    PENDING = 0;
+    APPROVE = 1;
+}
+
+message UserData {
+    optional string userData = 1;
+}
+
+message CreateUser {
+    string username = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message UpdateUser {
+    string id = 1;
+    optional string username = 2;
+    optional string email = 3;
+    optional string password = 4;
+    optional ProfileStatus status = 5;
+}
+
+message FindOneUser {
+    optional string id = 1;
+    optional string email = 2;
+}
+
+message ResponseStatus {
+    string status = 1;
+}
+
+message ResponseUser {
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    ProfileStatus status = 5;
+    string role = 6;
+    string createdAt = 7;
+}
+
+message ArrayUsers {
+    repeated ResponseUser users = 1;
+}
+
+message UserId {
+    string id = 1;
+}
+
+message UserForCompare {
+    string email = 1;
+    string password = 2;
+}
+
+message CompareResult {
+    bool result = 1;
+}
